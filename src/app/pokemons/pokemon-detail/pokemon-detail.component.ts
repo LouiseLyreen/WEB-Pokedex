@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../services/pokemon.service';
@@ -11,24 +11,37 @@ import {Location} from "@angular/common";
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss']
 })
-export class PokemonDetailComponent implements OnInit {
+export class PokemonDetailComponent implements OnInit, OnChanges {
 
   @Input() pokemon?: PokemonDetails;
+
 
   constructor(private pokemonservice :PokemonService,private route: ActivatedRoute, private pageAct: Location) { }
 
   getPokemon(): void {
     const id = +this.route.snapshot.paramMap!.get('id');
     if (id != null)
-        this.pokemonservice.getPokemonInfoById(id).subscribe(myResult => this.pokemon = myResult);
-}
+      this.pokemonservice.getPokemonInfoById(id).subscribe(myResult => this.pokemon = myResult);
+  }
+
+  //pageAvt(): void {
+  //this.pageAct.back();
+  //}
+
   ngOnInit(): void {
     //this.pokemonservice.getPokemonInfoById(id).subscribe;
     this.getPokemon();
   }
 
-  pageAvt(): void {
-    this.pageAct.back();
-}
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error('Method not implemented.');
+    if (changes['pokemon'].currentValue) {
+            if (changes['pokemon'].currentValue != changes['pokemon'].previousValue) {
+                this.pokemonservice.getPokemonInfoById(changes['pokemon'].currentValue.id).subscribe(myResult => {
+                    this.pokemon = myResult;
+                });
+            }
+    }
+  }
 
 }

@@ -9,14 +9,15 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
-
-
+import { PokedexComponent } from './pokedex/pokedex.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 @NgModule({
   declarations: [
     PokemonListComponent,
-    PokemonDetailComponent
+    PokemonDetailComponent,
+    PokedexComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +28,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatCardModule,
     MatGridListModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule
   ]
 })
 export class PokemonsModule { }
