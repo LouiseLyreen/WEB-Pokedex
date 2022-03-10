@@ -14,7 +14,6 @@ export class PokemonListComponent implements OnInit {
   maListeDePokemon: any = [];
   limit = 0;
   limitMax = 151;
-  realSearch!: string;
 
   @ViewChild('searchField')
   private searchField!: ElementRef;
@@ -31,9 +30,9 @@ export class PokemonListComponent implements OnInit {
   ngAfterViewInit(): void {
     fromEvent(this.searchField.nativeElement, 'keyup').pipe(map((i: any) => i.currentTarget.value), debounceTime(250)).subscribe((parameter) => {
       if (parameter !== '') {
-        this.pokemonservice.getPokemons(null, null, parameter).subscribe((myResult) => {this.maListeDePokemon = myResult.data;});
+        this.pokemonservice.getPokemons(null, null, parameter).subscribe((myResult) => {this.maListeDePokemon = myResult;});
       } else {
-        this.pokemonservice.getPokemons(this.limit).subscribe(myResult => {this.maListeDePokemon = myResult.data;});
+        this.pokemonservice.getPokemons(this.limit).subscribe(myResult => {this.maListeDePokemon = myResult;});
         }
     });
   }
@@ -48,6 +47,5 @@ export class PokemonListComponent implements OnInit {
     this.getPokemonDetailsEmitter.emit(pokemon);
   }
 
-  searchPokemon(event: any): void {
-  }
+
 }
