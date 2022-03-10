@@ -10,6 +10,7 @@ import { ApiResponse } from '../models/apiResponse.model';
 export class PokemonService {
 
   constructor(private http: HttpClient) { }
+
   getPokemons(limit?: number, offset?: number, search?: string): Observable<ApiResponse> {
     let params = new HttpParams();
     if (limit) {
@@ -24,7 +25,8 @@ export class PokemonService {
 
     return this.http.get<ApiResponse>(environment.pokemonsUrl, {params});
   }
+
   getPokemonInfoById(id: number): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.pokemonDetails + id);
-}
+  }
 }

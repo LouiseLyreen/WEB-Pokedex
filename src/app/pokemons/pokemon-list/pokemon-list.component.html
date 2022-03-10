@@ -1,7 +1,14 @@
-<mat-list>
+<!--<mat-list>-->
+<mat-form-field>
+    <mat-label>Recherche</mat-label>
+    <mat-hint>Recherche par nom et par id</mat-hint>
+    <input matInput type="search" [ngModel]="realSearch" (ngModelChange)="searchPokemon($event)">
+</mat-form-field>
+<mat-list >
   <mat-list-item *ngFor="let pokemon of maListeDePokemon.data">
     <img matListAvatar src="assets/img/sprites/{{pokemon.id}}.png" >
-    <a matLine  style="color: white" [routerLink]="['/details',pokemon.id]" routerLinkActive="router-link-active" >
+    <!--<a matLine  style="color: white" [routerLink]="['/details',pokemon.id]" routerLinkActive="router-link-active" >-->
+    <a matLine  style="color: white; cursor: pointer;" (click)="getPokemonDetails(pokemon)" >
         <span> {{pokemon.id}}. </span>
         <span> {{pokemon.name}} </span>
     </a>
