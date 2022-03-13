@@ -37,4 +37,8 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
     }
   }
 
+  //pageAvt(): void {
+  //  this.pageAct.back();
+  //}
+
 }

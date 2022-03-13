@@ -6,7 +6,11 @@ export const environment = {
   production: false,
   pokemonsUrl: 'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons',
   pokemonDetails:'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons/',
-  pokemonSearch: 'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons?search='
+  pokemonSearch: 'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/pokemons?search=',
+  pokemonLogin: 'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/auth/login',
+  pokemonTeam: 'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io/trainers/me/team',
+  email: 'louise.seulin@ig2i.centralelille.fr',
+  password: 'init1234'
 };
 
 /*
