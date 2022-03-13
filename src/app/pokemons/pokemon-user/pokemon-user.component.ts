@@ -15,19 +15,19 @@ export class PokemonUserComponent implements OnInit {
   password = environment.password;
   showForm = true;
 
-  constructor(private route: Router, private auth: LoginService) { }
+  constructor(private route: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
   login(): void {
-    this.auth.login(this.email, this.password).subscribe((response: LoginResponse) => {
-      if (this.auth.isLoggedIn()) { this.showForm = false;console.log("OUI"); }
+    this.loginService.login(this.email, this.password).subscribe((response: LoginResponse) => {
+      if (this.loginService.isLoggedIn()) { this.showForm = false;console.log("OUI"); }
     });
   }
 
   logout():void{
-    this.auth.logout();
+    this.loginService.logout();
     this.showForm = true;
   }
   //pitié mes pokémons sont déformés

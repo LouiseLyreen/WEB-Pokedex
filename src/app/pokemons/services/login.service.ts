@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '../models/apiLogin';
 import { environment } from "../../../environments/environment";
@@ -10,7 +9,7 @@ import { environment } from "../../../environments/environment";
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   login(email?: string, password?: string): Observable<LoginResponse> {
     if (email && password) {

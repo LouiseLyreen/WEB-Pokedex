@@ -1,2 +1,18 @@
-
-
+<mat-card *ngIf="showTeam">
+  <button class="corn" (click)="getTeam()" title="chargement"><mat-icon>autorenew</mat-icon></button>
+  <mat-grid-list cols="6" rowHeight="90px">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <img class="illeee" src="assets/img/official-artwork/trainer-2.png">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="2">
+      <mat-chip-list aria-label="Color selection">
+        <mat-chip *ngFor="">
+          <img matListAvatar src="assets/img/sprites/{{pokemon.data[0].id}}.png" alt="{{pokemon.data[0].name}}">
+            <span> {{pokemon.data[0].id}}. </span>
+            <span> {{pokemon.data[0].name}} </span>
+          <div class="remove"><mat-icon matChipRemove>cancel</mat-icon></div>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
