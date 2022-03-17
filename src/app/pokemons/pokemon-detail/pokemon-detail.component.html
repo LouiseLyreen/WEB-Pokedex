@@ -15,6 +15,7 @@
             <span class="titreee">{{pokemon.name}} </span>
               <mat-icon class="play-button" (click)="pokemonSound.play()">play_circle_outline</mat-icon>
               <audio #pokemonSound autoplay controls src="assets/audio/{{pokemon.id}}.mp3"></audio>
+              <mat-icon *ngIf="showAdd" class="add" (click)="addToTeam(pokemon)">add_circle_outline</mat-icon>
           </mat-list-item>
           <mat-list-item>
             <mat-chip-list class="example-chip" cdkDropList>

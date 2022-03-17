@@ -10,6 +10,7 @@ export class PokedexComponent implements OnInit {
 
   selectedPokemon?: Pokemon;
   connected?: boolean;
+  newPokemon?: number;
 
   constructor() { }
 
@@ -22,5 +23,9 @@ export class PokedexComponent implements OnInit {
 
   onGetTeam($event:boolean):void{
     this.connected = $event;
+  }
+
+  onAdd($event:number): void{
+    this.newPokemon = $event;
   }
 }

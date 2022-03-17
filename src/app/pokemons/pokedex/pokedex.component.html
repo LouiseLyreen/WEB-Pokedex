@@ -6,8 +6,8 @@
   </mat-drawer>
 
   <mat-drawer-content>
-    <app-pokemon-team [displayBlock]="connected"></app-pokemon-team>
-    <app-pokemon-detail [pokemon]="selectedPokemon"></app-pokemon-detail>
+    <app-pokemon-team [displayBlock]="connected" [pokemonToAdd]="newPokemon"></app-pokemon-team>
+    <app-pokemon-detail [pokemon]="selectedPokemon" [displayBlock]="connected" (addNewPokemonEmitter)="onAdd($event)"></app-pokemon-detail>
   </mat-drawer-content>
 
 </mat-drawer-container>

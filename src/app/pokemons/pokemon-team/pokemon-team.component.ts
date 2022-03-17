@@ -1,8 +1,12 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
+import { PokemonDetails } from '../models/pokemon-details.model';
+import { Pokemon } from '../models/pokemon.model';
 import { LoginService } from '../services/login.service';
 import { PokemonService } from '../services/pokemon.service';
 import { TeamService } from '../services/team.service';
+
+import { ApiResponse } from '../models/apiResponse.model';
 
 @Component({
   selector: 'app-pokemon-team',
@@ -14,8 +18,10 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
   team = [];
   teamNumber : number[];
   showForm=false;
+  pokemonDetails? : ApiResponse;
 
   @Input() displayBlock?: boolean;
+  @Input() pokemonToAdd?: number;
 
   constructor( private pokemonService: PokemonService, private loginService: LoginService, private teamService: TeamService) { }
 
@@ -35,14 +41,25 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
-    if (changes['displayBlock'].currentValue == true) {
+    if (undefined !== changes['displayBlock'] && changes['displayBlock'].currentValue == true) {
       //afficher
       this.showForm=true;
       this.getTeam();
-    }else if(changes['displayBlock'].currentValue == false){
+    } else if(undefined !== changes['displayBlock'] && changes['displayBlock'].currentValue == false){
       //faire disparaitre
       this.showForm=false;
     }
+    if (undefined !== changes['pokemonToAdd'] && changes['pokemonToAdd'].currentValue){
+      //ajouter à l'équipe si <6
+      if (this.teamNumber.length<6){
+        this.teamNumber.push(changes['pokemonToAdd'].currentValue);
+        this.teamService.setTeam(this.teamNumber, localStorage.getItem("access_token"));
+
+        this.pokemonService.getPokemonInfoById(changes['pokemonToAdd'].currentValue).subscribe(myResult => {console.log(myResult);this.pokemonDetails = myResult; this.team.push(this.pokemonDetails);});
+
+      }
+    }
+
   }
 
   remove(pokemonToDelete: any): void {
@@ -53,7 +70,7 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
   }
 
   removeElementFromArray(array: any[], element: any) {
-    //falg permet d'avoir plusieurs pokemons au même id
+    //flag permet d'avoir plusieurs pokemons au même id
     let flag= false;
     array.forEach((value, index) => {
       if (!flag && value == element) {
@@ -62,5 +79,7 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
       }
     });
   }
+
+
 
 }
