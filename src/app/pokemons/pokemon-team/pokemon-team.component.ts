@@ -12,6 +12,7 @@ import { TeamService } from '../services/team.service';
 export class PokemonTeamComponent implements OnInit, OnChanges {
 
   team = [];
+  teamNumber : number[];
   showForm=false;
 
   @Input() displayBlock?: boolean;
@@ -26,7 +27,7 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
     this.team = [];
 
     this.teamService.getTeam().subscribe((result) => {
-        this.team = result;
+        this.teamNumber = result;
         const forkArray: Observable<any>[] = result.map((id) => this.pokemonService.getPokemons(null, null, id.toString()));
         forkJoin(forkArray).subscribe(team => {this.team = team;});
     });
@@ -42,6 +43,24 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
       //faire disparaitre
       this.showForm=false;
     }
+  }
+
+  remove(pokemonToDelete: any): void {
+    console.log("OUI");
+    this.removeElementFromArray(this.team, pokemonToDelete);
+    this.removeElementFromArray(this.teamNumber, pokemonToDelete.data[0].id);
+    this.teamService.setTeam(this.teamNumber, localStorage.getItem("access_token"));
+  }
+
+  removeElementFromArray(array: any[], element: any) {
+    //falg permet d'avoir plusieurs pokemons au même id
+    let flag= false;
+    array.forEach((value, index) => {
+      if (!flag && value == element) {
+        array.splice(index, 1);
+        flag= true;
+      }
+    });
   }
 
 }

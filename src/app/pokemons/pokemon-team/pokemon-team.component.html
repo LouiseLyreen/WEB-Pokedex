@@ -1,16 +1,15 @@
 <mat-card *ngIf="showForm">
   <!--<button class="corn" (click)="getTeam()" title="chargement"><mat-icon>autorenew</mat-icon></button>-->
-  <mat-grid-list cols="6" rowHeight="180px">
+  <mat-grid-list cols="3" rowHeight="100px">
     <mat-grid-tile [colspan]="1" [rowspan]="2">
       <img class="illeee" src="assets/img/official-artwork/trainer-2.png">
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="2">
       <mat-chip-list >
-        <mat-chip *ngFor="let pokemon of team" class="mineee"><!--let pokemon of maListeDePokemon.data-->
-
+        <mat-chip *ngFor="let pokemon of team" class="mineee" (removed)="remove(pokemon)"><!--let pokemon of maListeDePokemon.data-->
           <img matListAvatar src="assets/img/sprites/{{pokemon.data[0].id}}.png" alt="{{pokemon.data[0].name}}">
-            <span> {{pokemon.data[0].name}} </span>
-
+          <span> {{pokemon.data[0].name}} </span>
+           <div class="removeee"><mat-icon matChipRemove>cancel</mat-icon></div>
         </mat-chip>
       </mat-chip-list>
     </mat-grid-tile>
