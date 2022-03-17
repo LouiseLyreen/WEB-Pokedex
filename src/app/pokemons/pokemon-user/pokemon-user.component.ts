@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from "../../../environments/environment";
 import { LoginService } from '../services/login.service';
@@ -15,6 +15,8 @@ export class PokemonUserComponent implements OnInit {
   password = environment.password;
   showForm = true;
 
+  @Output() getTeamEmitter = new EventEmitter<boolean>();
+
   constructor(private route: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
@@ -22,13 +24,17 @@ export class PokemonUserComponent implements OnInit {
 
   login(): void {
     this.loginService.login(this.email, this.password).subscribe((response: LoginResponse) => {
-      if (this.loginService.isLoggedIn()) { this.showForm = false;console.log("OUI"); }
+      if (this.loginService.isLoggedIn()) {
+        this.showForm = false;
+        this.getTeamEmitter.emit(true);
+      }
     });
   }
 
   logout():void{
     this.loginService.logout();
     this.showForm = true;
+    this.getTeamEmitter.emit(false);
   }
   //pitié mes pokémons sont déformés
 

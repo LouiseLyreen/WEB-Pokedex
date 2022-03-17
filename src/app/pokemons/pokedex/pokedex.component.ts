@@ -9,6 +9,7 @@ import {Pokemon} from "../models/pokemon.model";
 export class PokedexComponent implements OnInit {
 
   selectedPokemon?: Pokemon;
+  connected?: boolean;
 
   constructor() { }
 
@@ -17,5 +18,9 @@ export class PokedexComponent implements OnInit {
 
   onGetPokemonDetails($event: Pokemon): void {
     this.selectedPokemon = $event;
-}
+  }
+
+  onGetTeam($event:boolean):void{
+    this.connected = $event;
+  }
 }

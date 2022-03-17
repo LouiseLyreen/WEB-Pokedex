@@ -2,3 +2,32 @@
   max-height: 150px;
   max-width: 150px;
 }
+
+.team-card {
+  height: 400px;
+  width: 1000px;
+  margin: auto;
+}
+
+mat-chip {
+  padding: 25px!important;
+}
+
+.remove{
+  float: right;
+  position: relative;
+}
+
+button {
+  border: whitesmoke 1px solid;
+  background-color: #aaaaaa;
+}
+
+.alert {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+.mineee{
+  min-width: 300px;
+}
