@@ -40,7 +40,6 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (undefined !== changes['displayBlock'] && changes['displayBlock'].currentValue == true) {
       //afficher
       this.showForm=true;
@@ -55,7 +54,10 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
         this.teamNumber.push(changes['pokemonToAdd'].currentValue);
         this.teamService.setTeam(this.teamNumber, localStorage.getItem("access_token"));
 
-        this.pokemonService.getPokemonInfoById(changes['pokemonToAdd'].currentValue).subscribe(myResult => {console.log(myResult);this.pokemonDetails = myResult; this.team.push(this.pokemonDetails);});
+        this.pokemonService.getPokemons(null, null, changes['pokemonToAdd'].currentValue).subscribe(myResult => {
+          this.pokemonDetails = myResult;
+          this.team.push(this.pokemonDetails);
+        });
 
       }
     }
@@ -63,7 +65,6 @@ export class PokemonTeamComponent implements OnInit, OnChanges {
   }
 
   remove(pokemonToDelete: any): void {
-    console.log("OUI");
     this.removeElementFromArray(this.team, pokemonToDelete);
     this.removeElementFromArray(this.teamNumber, pokemonToDelete.data[0].id);
     this.teamService.setTeam(this.teamNumber, localStorage.getItem("access_token"));

@@ -35,7 +35,6 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     //Display pokemon details
     if (undefined !== changes['pokemon'] && changes['pokemon'].currentValue) {
       if (changes['pokemon'].currentValue != changes['pokemon'].previousValue) {
